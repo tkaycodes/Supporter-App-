@@ -1,0 +1,19 @@
+<div class="container">
+  <table class="table table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Department</th>
+    <th>Message</th>
+    <th>Actions</th>
+  </tr>
+  <tr>
+    <td><%=@request.name%></td>
+    <td><%=@request.email%></td>
+    <td><%=@request.department%></td>
+    <td><%=@request.message%></td>
+    <td>'edit', 'delete'</td>
+  <tr>
+</table>
+  <%=link_to "Back", root_path%>
+</div>

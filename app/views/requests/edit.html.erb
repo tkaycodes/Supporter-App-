@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Edit Request</h2>
+  <%=form_for @request, url: edit_request_path, class: 'form-group' do |f|%>
+
+      <%=f.label :name%>
+      <%=f.text_field :name, class: 'form-control'%>
+
+      <%=f.label :email%>
+      <%=f.email_field :email, class: 'form-control'%>
+
+
+      <div class="form-group">
+        <%=f.label :department%>
+        <%=f.radio_button :department, 'Sales'%> Sales
+        <%=f.radio_button :department, 'Marketing'%> Marketing
+        <%=f.radio_button :department, 'Technical'%> Technical
+      </div>
+
+
+      <%=f.label :message%>
+      <%=f.text_area :message, class: 'form-control'%><br>
+
+    <%=f.submit class:'btn btn-default'%>
+
+  <%end%><hr>
+  <%=link_to 'Back', root_path%>
+</div>

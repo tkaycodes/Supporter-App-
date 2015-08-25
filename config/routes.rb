@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
   root 'requests#index'
+
   get '/new' => 'requests#new'
   post '/new' => 'requests#create'
+
+  get '/request/:id' => 'requests#show', as: :show_request
+
+  get '/request/:id/edit' => 'requests#edit', as: :edit_request
+  patch '/request/:id/edit' => 'requests#update'
+
+  get '/request/:id/delete' => 'requests#destroy', as: :delete_request
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
