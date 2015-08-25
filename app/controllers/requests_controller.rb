@@ -1,6 +1,10 @@
 class RequestsController < ApplicationController
   def index
-    @requests = Request.all
+    if params[:userinput].present?
+      @requests = Request.where("name ILIKE ? OR department ILIKE ?", "%#{params[:userinput]}%", "%#{params[:userinput]}%")
+    else
+      @requests = Request.all
+    end
   end
 
   def new

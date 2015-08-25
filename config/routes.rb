@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/request/:id/delete' => 'requests#destroy', as: :delete_request
 
+  get '/searchresults' => 'requests#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,6 +1,16 @@
 <%=link_to "New Request", new_path, class: 'btn btn-default'%>
 <hr>
-<h3>Requests</h3>
+<div class="row">
+  <div class="col-sm-2">
+    <h3 style="margin-top:0px;">Requests</h3>
+  </div>
+  <div class="col-sm-10">
+    <%=form_tag '/searchresults/', method: 'get' do%>
+      <input class="form-control col-sm-6" name="userinput" placeholder="Search Requests by Name or Department"></input>
+    <%end%>
+  </div>
+</div>
+
 <table class="table table-bordered">
   <tr>
     <th>Name</th>
@@ -8,16 +18,26 @@
     <th>Department</th>
     <th>Message</th>
     <th>Actions</th>
+    <th>Status</th>
+
   </tr>
   <%@requests.each do |x|%>
   <tr>
     <td><%=x.name%></td>
-    <td><%=x.email%></td>
+    <td><%=mail_to x.email%></td>
+
     <td><%=x.department%></td>
     <td><%=x.message%></td>
     <td><%=link_to "Show", show_request_path(x.id)%>
         <%=link_to "Edit", edit_request_path(x.id)%> 
         <%=link_to "Delete", delete_request_path(x.id), data: {confirm: "Are you sure?"}%></td>
+    <td><%=link_to "Done"%> | <%=link_to "Undone"%></td>
+
   <tr>
   <%end%>
 </table>
+
+<%if params[:userinput].present?%>
+<%=link_to "Back", root_path%>
+<%end%>
+
