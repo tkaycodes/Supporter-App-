@@ -1,0 +1,19 @@
+<%=link_to "New Request", new_path, class: 'btn btn-default'%>
+<hr>
+<h3>Requests</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Department</th>
+    <th>Message</th>
+  </tr>
+  <%@requests.each do |x|%>
+  <tr>
+    <td><%=x.name%></td>
+    <td><%=x.email%></td>
+    <td><%=x.department%></td>
+    <td><%=x.message%></td>
+  <tr>
+  <%end%>
+</table>
