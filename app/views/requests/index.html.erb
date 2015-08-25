@@ -1,4 +1,4 @@
-<%=link_to "New Request", new_path, class: 'btn btn-default'%>
+<%=link_to "New Request", new_path, class: 'btn btn-success'%>
 <hr>
 <div class="row">
   <div class="col-sm-2">
@@ -9,7 +9,7 @@
       <input class="form-control col-sm-6" name="userinput" placeholder="Search Requests by Name or Department"></input>
     <%end%>
   </div>
-</div>
+</div><br>
 
 <table class="table table-bordered">
   <tr>
@@ -17,27 +17,35 @@
     <th>Email</th>
     <th>Department</th>
     <th>Message</th>
-    <th>Actions</th>
-    <th>Status</th>
+    <th style="text-align:center">Actions</th>
+    <th style="text-align:center">Status</th>
 
   </tr>
+  <div id="allrequests">
   <%@requests.each do |x|%>
-  <tr>
-    <td><%=x.name%></td>
-    <td><%=mail_to x.email%></td>
+      <tr>
+        <td><%=x.name%></td>
+        <td><%=mail_to x.email%></td>
 
-    <td><%=x.department%></td>
-    <td><%=x.message%></td>
-    <td><%=link_to "Show", show_request_path(x.id)%>
-        <%=link_to "Edit", edit_request_path(x.id)%> 
-        <%=link_to "Delete", delete_request_path(x.id), data: {confirm: "Are you sure?"}%></td>
-    <td><%=link_to "Done"%> | <%=link_to "Undone"%></td>
-
-  <tr>
+        <td><%=x.department%></td>
+        <td><%=x.message%></td>
+        <td style="text-align:center"><%=link_to "Show", show_request_path(x.id), class: "btn btn-primary"%>
+            <%=link_to "Edit", edit_request_path(x.id), class: "btn btn-info"%> 
+            <%=link_to "Delete", delete_request_path(x.id), data: {confirm: "Are you sure?"}, class: "btn btn-danger"%></td>
+        <%if x.status == false%>
+        <td> <span class="btn btn-info active">Undone</span>  <%=link_to "Mark as Done", edit_request_path(x, request: {:status => true }), method: :patch, class: "btn btn-success", style: "float:right"%></td>
+        <%else%>
+        <td> <span class="btn btn-info active">Done</span>  <%=link_to "Mark as Undone", edit_request_path(x, request: {:status => false}), method: :patch, class: "btn btn-success", style: "float:right"%> </td>
+        <%end%>
+      <tr>
   <%end%>
+  </div>
 </table>
 
 <%if params[:userinput].present?%>
 <%=link_to "Back", root_path%>
 <%end%>
 
+<div class="row" style="text-align:center">
+<span><%=paginate @requests unless params[:userinput].present?%></span>
+</div>

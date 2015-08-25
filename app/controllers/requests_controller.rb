@@ -3,7 +3,8 @@ class RequestsController < ApplicationController
     if params[:userinput].present?
       @requests = Request.where("name ILIKE ? OR department ILIKE ?", "%#{params[:userinput]}%", "%#{params[:userinput]}%")
     else
-      @requests = Request.all
+      # @requests = Request.all
+      @requests = Request.all.page(params[:page]).per(5)
     end
   end
 
@@ -27,8 +28,10 @@ class RequestsController < ApplicationController
 
   def update
     @request = Request.find(params[:id])
-    @request.update(params.require(:request).permit(:name, :email, :department, :message))
+    # render text: params
+    @request.update(params.require(:request).permit(:name, :email, :department, :message, :status))
     redirect_to :back
+    # render text: params
   end
 
   def destroy
