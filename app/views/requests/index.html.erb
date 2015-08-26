@@ -13,12 +13,12 @@
 
 <table class="table table-bordered">
   <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Department</th>
-    <th>Message</th>
-    <th style="text-align:center">Actions</th>
-    <th style="text-align:center">Status</th>
+    <th class="col-md-2">Name</th>
+    <th class="col-md-2">Email</th>
+    <th class="col-md-1">Department</th>
+    <th class="col-md-2">Message</th>
+    <th class="col-md-2"style="text-align:center">Actions</th>
+    <th class="col-md-2"style="text-align:center">Status</th>
 
   </tr>
   <div id="allrequests">
@@ -28,7 +28,7 @@
         <td><%=mail_to x.email%></td>
 
         <td><%=x.department%></td>
-        <td><%=x.message%></td>
+        <td><%=truncate(x.message)%></td>
         <td style="text-align:center"><%=link_to "Show", show_request_path(x.id), class: "btn btn-primary"%>
             <%=link_to "Edit", edit_request_path(x.id), class: "btn btn-info"%> 
             <%=link_to "Delete", delete_request_path(x.id), data: {confirm: "Are you sure?"}, class: "btn btn-danger"%></td>
